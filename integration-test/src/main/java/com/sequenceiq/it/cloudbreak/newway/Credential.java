@@ -29,6 +29,15 @@ public class Credential extends CredentialEntity {
         return credential;
     }
 
+    public static Credential isDeleted() {
+        Credential credential = new Credential();
+        credential.setCreationStrategy(CredentialAction::createInGiven);
+
+        delete(credential.getName());
+
+        return credential;
+    }
+
     public static Action<Credential> post(String key) {
         return new Action<Credential>(getTestContextCredential(key), CredentialAction::post);
     }
